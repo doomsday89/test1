@@ -1,0 +1,20 @@
+<div class="ingreso">
+    <div class="presupuesto_ingreso limpiarEstilos">
+        <div class="right">
+            <div class="presupuesto_ingreso--valor">{{IngresoTotal|currency}}</div>
+        </div>
+    </div>
+        
+        <div class="elemento limpiarEstilos" *ngFor="let item of aIngresos">
+            <div>{{item.Fecha |date:"dd-mm-yyyy"}}</div>
+            <div class="elemento_descripcion">{{item.Descripcion}}</div>
+            <div class="right limpiarEstilos">
+                <div class="elemento_valor"> {{item.Valor|currency}}</div>
+                <div class="elemento_eliminar">
+                    <button class="elemento_eliminar--btn" (click)="QuitarIngreso(item)">
+                        <i class="ion-ios-close-outline"></i>
+                    </button>
+                </div>
+            </div>
+        </div>       
+</div>

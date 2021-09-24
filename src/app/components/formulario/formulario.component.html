@@ -1,0 +1,11 @@
+<form>
+    <div class="agregar">
+        <div class="agregar_contenedor">  
+            <input [(ngModel)]="oTipo.Fecha" type="date" name="Fecha" class="fecha">
+            <input [(ngModel)]="oTipo.Descripcion" name="Descripción" type="text" class="agregar_descripcion" placeholder="Descripción">
+            <input [(ngModel)]="oTipo.Valor" name="Valor" type="number" class="agregar_valor" placeholder="Valor">
+            <button type="button" class="agregar_btn" (click)="AgregarI()"><i class="ion-ios-checkmark-outline"></i></button>
+            <button type="button" class="agregar_btn rojo" (click)="AgregarE()"><i class="ion-ios-close-outline"></i></button>
+        </div>
+    </div>
+  </form>

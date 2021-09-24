@@ -1,0 +1,19 @@
+<div class="cabecero">
+    <div class="presupuesto">        
+        <div class="presupuesto_valor">{{SaldoTotal | currency:"MNX":"$"}}</div>
+        
+        <div class="presupuesto_ingreso limpiarEstilos">
+            <div class="right">
+                <div class="presupuesto_ingreso--valor"> {{IngresoTotal|currency}}</div>
+                <div class="presupuesto_ingreso--porcentaje">&nbsp;</div>
+            </div>
+        </div>
+        <div class="presupuesto_egreso limpiarEstilos">
+            <div class="right">
+                <div class="presupuesto_ingreso--valor">- {{EgresoTotal|currency}}</div>
+                <div class="presupuesto_ingreso--porcentaje">&nbsp;</div>
+            </div>
+        </div>
+                
+    </div>
+  </div>

@@ -1,0 +1,14 @@
+<div class="egreso">
+    <h2 class="egreso_titulo">Egresos</h2>
+        <div class="elemento limpiarEstilos" *ngFor="let item of aEgresos">
+            <div class="elemento_descripcion">{{item.Descripcion}}</div>
+            <div class="right limpiarEstilos">
+                <div class="elemento_valor">- {{item.Valor |currency:"$"}}</div>
+                
+                <div class="elemento_eliminar">
+                    <button class="elemento_eliminar--btn" (click)="QuitarEgreso(item)"><i class="ion-ios-close-outline"></i></button>
+                </div>
+            </div>
+        </div>
+              
+</div>
