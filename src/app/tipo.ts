@@ -1,8 +1,10 @@
 export class Tipo {
-    Fecha:Date;
+    Id:string;
     Descripcion:string;
+    Fecha:Date;
     Valor:number;
-    constructor(desc:string,Val:number){
+    constructor(id:string,desc:string,Val:number){
+        this.Id = id;
         this.Fecha = new Date();
         this.Descripcion=desc;
         this.Valor=Val;

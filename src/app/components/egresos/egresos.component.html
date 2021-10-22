@@ -1,12 +1,19 @@
 <div class="egreso">
-    <h2 class="egreso_titulo">Egresos</h2>
+    <div class="presupuesto_egreso limpiarEstilos text-white">
+        <h2 class="left">EGRESOS</h2>
+        <div class="right">
+            <h2>{{EgresoTotal|currency}} </h2>
+        </div>
+    </div>
         <div class="elemento limpiarEstilos" *ngFor="let item of aEgresos">
+            <div>{{item.Fecha |date:'dd-MMM/yyyy'}}</div>
             <div class="elemento_descripcion">{{item.Descripcion}}</div>
             <div class="right limpiarEstilos">
                 <div class="elemento_valor">- {{item.Valor |currency:"$"}}</div>
                 
                 <div class="elemento_eliminar">
-                    <button class="elemento_eliminar--btn" (click)="QuitarEgreso(item)"><i class="ion-ios-close-outline"></i></button>
+                    <button class="elemento_eliminar--btn" (click)="QuitarEgreso(item)">
+                        <img src="../../../assets/x-red.svg" height="22" alt=""></button>
                 </div>
             </div>
         </div>

@@ -1,3 +1,5 @@
+import {AngularFirestore} from '@angular/fire/firestore';
+
 import { EventEmitter, Injectable } from '@angular/core';
 import { Tipo } from './tipo';
 
@@ -6,14 +8,14 @@ import { Tipo } from './tipo';
 })
 export class TransactionsService {
 
-  constructor() { }
+  constructor(private _firestore:AngularFirestore) { }
   aIngresos:Tipo[]=[
-    new Tipo("Salario",17500),
-    new Tipo("Salario2",500)
+    new Tipo("1","Salario",17500),
+    new Tipo("2","Salario2",500)
   ];
   aEgresos:Tipo[]=[
-    new Tipo("Renta",1750),
-    new Tipo("Lavadora",250)
+    new Tipo("1","Renta",1750),
+    new Tipo("2","Lavadora",250)
   ];
   Ingreso$=new EventEmitter<Tipo[]>();
   Egreso$=new EventEmitter<Tipo[]>();
@@ -39,5 +41,18 @@ export class TransactionsService {
   QuitarEgreso(o:Tipo){
     this.aEgresos.splice(this.aEgresos.indexOf(o),1);
     this.Egreso$.emit(this.aEgresos);
+  }
+  getIngresos(){
+    return this._firestore.collection('Ingresos',ref=>ref.orderBy('Fecha')).snapshotChanges();
+  }
+  addIngreso(oIngreso){
+    return this._firestore.collection('Ingresos').add(oIngreso);
+  }
+  getEgresos()
+  {
+    return this._firestore.collection('Egresos',ref=>ref.orderBy('Fecha')).snapshotChanges();
+  }
+  addEgreso(oEgreso){
+    return this._firestore.collection('Egresos').add(oEgreso);
   }
 }

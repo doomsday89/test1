@@ -16,7 +16,12 @@ export class FormularioComponent implements OnInit {
   oTipo={} as Tipo;
   //Methods
   AgregarI(){
-      this._service.AgregarIngreso(new Tipo(this.oTipo.Descripcion,this.oTipo.Valor));
+      //this._service.AgregarIngreso(new Tipo("",this.oTipo.Descripcion,this.oTipo.Valor));
+      this._service.addIngreso({
+        'Fecha': this.oTipo.Fecha,
+        'Descripcion':this.oTipo.Descripcion,
+        'Valor':this.oTipo.Valor
+      });
     }
     AgregarE(){
       this._service.AgregarEgreso(this.oTipo);
