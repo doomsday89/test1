@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { element } from 'protractor';
 import { Tipo } from 'src/app/tipo';
 import { TransactionsService } from 'src/app/transactions.service';
 
@@ -11,13 +12,8 @@ export class IngresosComponent implements OnInit {
 
   constructor(private _service:TransactionsService) {     
     //this.SubTotal(this._service.getAllIngresos());
-    this._service.getIngresos().subscribe(data=>{
-      data.forEach((element)=>{
-        this.aIngresos.push(element.payload.doc.data());
-      });
-      this.SubTotal(this.aIngresos);
-    });
-    this._service.Ingreso$.subscribe((a)=>this.SubTotal(a));    
+    this.GetIngresos();
+    this._service.Ingreso$.subscribe((a)=>this.SubTotal());    
   }
 
   ngOnInit(): void {
@@ -26,11 +22,25 @@ export class IngresosComponent implements OnInit {
   IngresoTotal:number;
 
   QuitarIngreso(o:Tipo){
-    this._service.QuitarIngreso(o);
+  //  this._service.QuitarIngreso(o);
+  this._service.deleteIngreso(o.Id)
+  .then(()=>this.SubTotal())
+  .catch(err=>console.log(err))
   }
-  SubTotal(a:any[]){
-    this.aIngresos=a;
+  GetIngresos(){
+    this._service.getIngresos().subscribe(data=>{
+      data.forEach((elemento,i)=>{
+        this.aIngresos.push(elemento.payload.doc.data());
+        const obj:Tipo=this.aIngresos[i];
+        obj.Id=elemento.payload.doc.id;
+      });
+      this.SubTotal();
+    });
+  }
+  SubTotal(){    
     this.IngresoTotal=0;
-    this.aIngresos.map((obj:Tipo)=>this.IngresoTotal+=obj.Valor);    
+    this.aIngresos.map((obj:Tipo)=>this.IngresoTotal+=obj.Valor); 
+    
   }
+  
 }

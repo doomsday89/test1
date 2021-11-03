@@ -11,12 +11,7 @@ export class EgresosComponent implements OnInit {
 
   constructor(private _service:TransactionsService) { 
     //this.SubTotal(this._service.getAllEgresos());
-    this._service.getEgresos().subscribe(data=>{
-      data.forEach((element)=>{
-        this.aEgresos.push(element.payload.doc.data());
-      });
-      this.SubTotal(this.aEgresos);
-    });
+    this.GetEgresos();
     this._service.Egreso$.subscribe((a)=>this.aEgresos=a);
   }
 
@@ -25,12 +20,28 @@ export class EgresosComponent implements OnInit {
   aEgresos:any[]=[];
   EgresoTotal:number=0;
   QuitarEgreso(o:Tipo){
-    this._service.QuitarEgreso(o);
+    //this._service.QuitarEgreso(o);
+    this._service.deleteEgreso(o.Id)
+    .then(()=>{
+      alert('registro eliminado');
+    }) 
+    .catch((err)=>console.log(err));
   }
-  SubTotal(a:any[]){
-    this.aEgresos=a;
+
+  GetEgresos(){
+    this.aEgresos=[];
+    this._service.getEgresos().subscribe(data=>{
+      data.forEach((elemento,i)=>{
+        this.aEgresos.push(elemento.payload.doc.data());
+        const obj:Tipo=this.aEgresos[i];
+        obj.Id=elemento.payload.doc.id;
+      });
+      this.SubTotal();
+    })
+  }
+  SubTotal(){    
     this.EgresoTotal=0;
     this.aEgresos.map((obj:Tipo)=>this.EgresoTotal+=obj.Valor);
-    this.aEgresos.forEach(element => {element.Fecha=new Date(element.Fecha)    });
+    //this.aEgresos.forEach(element => {element.Fecha=new Date(element.Fecha)    });
   }
 }

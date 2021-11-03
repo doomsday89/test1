@@ -24,6 +24,10 @@ export class FormularioComponent implements OnInit {
       });
     }
     AgregarE(){
-      this._service.AgregarEgreso(this.oTipo);
+      this._service.addEgreso({
+        'Fecha': this.oTipo.Fecha,
+        'Descripcion':this.oTipo.Descripcion,
+        'Valor':this.oTipo.Valor
+      });
     }
 }

@@ -42,17 +42,28 @@ export class TransactionsService {
     this.aEgresos.splice(this.aEgresos.indexOf(o),1);
     this.Egreso$.emit(this.aEgresos);
   }
+  //Ingresos
   getIngresos(){
     return this._firestore.collection('Ingresos',ref=>ref.orderBy('Fecha')).snapshotChanges();
   }
-  addIngreso(oIngreso){
+  addIngreso(oIngreso):Promise<any>{
+    this.Ingreso$.emit(this.aIngresos);
     return this._firestore.collection('Ingresos').add(oIngreso);
   }
+  deleteIngreso(id):Promise<any>{
+    return this._firestore.collection('Ingresos').doc(id).delete();
+  }
+  //Egresos
   getEgresos()
   {
     return this._firestore.collection('Egresos',ref=>ref.orderBy('Fecha')).snapshotChanges();
   }
   addEgreso(oEgreso){
+    this.Egreso$.emit(this.aEgresos);
     return this._firestore.collection('Egresos').add(oEgreso);
   }
+  deleteEgreso(id):Promise<any>{
+    return this._firestore.collection('Egresos').doc(id).delete();
+  }
+
 }
