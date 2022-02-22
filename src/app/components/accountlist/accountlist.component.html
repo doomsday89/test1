@@ -1,0 +1,20 @@
+<div class="card">
+    <h3 class="card-header text-white bg-warning">
+        Cuentas
+        <img class="float-right" src="../../../assets/plus.svg" height="32">
+    </h3>
+    
+    <div class="card-body">
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action" *ngFor="let item of aCuentas"> 
+                <div class="media">
+                <img src={{item.icon}} class="mr-3" alt="icon" height="32">
+                <div class="media-body">
+                  <h5 class="mt-0">{{item.nombre}}</h5>
+                  <p>{{item.monto}}</p>
+                </div>
+              </div>
+            </a>
+        </div>
+    </div>
+</div>
